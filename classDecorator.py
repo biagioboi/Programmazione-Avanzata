@@ -29,9 +29,9 @@ def ensure(name, fun, doc = None):
         def setter(self, value):
             try:
                 fun(name, value)
+                setattr(self, privateName, value)
             except ValueError as err:
                 print("Eccezione lanciata dal setter: " + str(err))
-            setattr(self, privateName, value)
         setattr(cls, name, property(getter, setter, doc=doc))
         return cls
     return decor
@@ -51,4 +51,5 @@ class Book:
         return self.price * self.quantity
 
 
-bk = Book("5648", 56556, 55550, 20)
+bk = Book("5648", 50, 50, 20)
+print(bk.price)
