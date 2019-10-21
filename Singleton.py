@@ -5,6 +5,7 @@ class Singleton:
         def spam(self):
             return id(self)
 
+
     def __init__(self):
         if Singleton.__instance is None:
             Singleton.__instance = Singleton.__impl()
