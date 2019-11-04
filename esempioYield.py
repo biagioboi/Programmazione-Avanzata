@@ -17,5 +17,7 @@ def raddoppia():
 g = raddoppia()
 r = next(g)
 next(g)
-r = g.send(10)
+g.throw(TypeError)
 print (r)
+
+
