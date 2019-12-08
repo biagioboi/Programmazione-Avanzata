@@ -1,0 +1,14 @@
+Chain of responsability:
+è un design pattern comportamentale ed è usato per separare il codice che effettua una richiesta
+da quello che elabora la richiesta; in pratica invece di avere una funzione che invoca direttamente
+un'altra funzione, la prima funzione invia una richiesta ad una catena di destinatari; in particolare
+il primo può decidere se elaborare la richiesta o passarla al successivo e così via finchè non si arriva all'ultimo
+l'ultimo può decidere se scartare la richiesta o lanciare un'eccezione.
+
+Come già anticipato nullHandler è l'ultimo della catena e potremmo immaginare che qualsiasi handler possa essere l'ultimo della catena
+dunque andiamo a scrivere l'init del nullHandler che prende un parametro, se tale parametro non è definito allora vuol dire che non ci sono successori
+ed è un nullHandler; il che significa che se c'è un parametro la funzione handle, fa passare il controllo alla classe successiva,
+viceversa se non ci sono parametri viene terminata la catena o viene lanciata un'eccezione.
+
+Così possiamo immaginare che MouseHandler gestirà solo eventi di tipo Mouse, se l'evento non è di quel tipo allora chiamerà la funzione handle della superclasse(NullHandler)
+che si occuperà di chiamare l'eventuale successore nella catena.
