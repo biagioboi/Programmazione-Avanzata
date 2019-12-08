@@ -1,0 +1,7 @@
+La classe Observed mantiene un insieme di oggetti osservatori; ogni volta che viene aggiunto un oggetto osservatore
+all'oggetto osservato, il metodo update() dell'osservatore viene invocato, al fine di inizializzare l'osservatore con lo
+stato attuale del modello (osservato).
+Se in seguito il modello cambia stato, esso invoca il metodo observers_notify() in modo tale che il metodo update() di
+ogni osservatore possa essere invocato per essere sicuri che ogni oggetto che fa parte dell'insieme degli osservatori
+venga aggiornato con lo stato attuale e possa intraprendere un'azione in base al nuovo stato.
+

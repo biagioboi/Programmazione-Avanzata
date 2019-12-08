@@ -1,51 +1,56 @@
 class Bambino:
-
-    ISCRITTO, ALSECONDOANNO, ALTERZOANNO, DIPLOMATO = ("iscritto", "alSecondoAnno", "alTerzoAnno", "diplomato")
+    _status = {0: "ISCRITTO", 1: "ALSECONDOANNO", 2: "ALTERZOANNO", 3: "DIPLOMATO"}
+    ISCRITTO, ALSECONDOANNO, ALTERZOANNO, DIPLOMATO = range(0, 4)
 
     def __init__(self):
+        self._state = 0
         self.state = Bambino.ISCRITTO
 
     @property
     def state(self):
-        return self.__state
+        if self._pred != self.pred:
+            return Bambino.ISCRITTO
+        elif self._salta_anno == self.salta_anno and self._pred == self.pred:
+            return Bambino.ALSECONDOANNO
+        elif self._salta_anno != self.salta_anno:
+            return Bambino.ALTERZOANNO
+        else:
+            return Bambino.DIPLOMATO
 
     @state.setter
     def state(self, value):
-        if (value == Bambino.ISCRITTO):
-            self.__state = Bambino.ISCRITTO
-            self.success = Bambino.ALSECONDOANNO
-            self.salto = Bambino.ALTERZOANNO
-            self.preced = "e` appena stato iscritto al I anno e non puo` tornare in uno stato precedente"
-        elif (value == Bambino.ALSECONDOANNO):
-            self.__state = Bambino.ALSECONDOANNO
-            self.success = Bambino.ALTERZOANNO
-            self.salto = Bambino.DIPLOMATO
-            self.preced = Bambino.ISCRITTO
-        elif(value == Bambino.ALTERZOANNO):
-            self.__state = Bambino.ALTERZOANNO
-            self.success = Bambino.DIPLOMATO
-            self.salto = "e` nello stato alTerzoAnno  e non puo` saltare un anno"
-            self.preced = Bambino.ALSECONDOANNO
-        elif(value == Bambino.DIPLOMATO):
-            self.__state = Bambino.DIPLOMATO
-            self.success = "si e` gia` diplomato e non puo` avanzare in uno stato successivo"
-            self.preced = Bambino.ALTERZOANNO
-            self.salto = "si e` gia` diplomato e non puo` avanzare in uno stato successivo"
-        else:
-            print("il bambino " + str(value))
-
+        if value == Bambino.ISCRITTO:
+            self.succ = self._succ
+            self.pred = lambda *args: print("Il bambino  e` appena stato iscritto al I anno e non puo` tornare in uno stato precedente")
+            self.salta_anno = Bambino._salta_anno
+        elif value == Bambino.ALSECONDOANNO:
+            self.succ = self._succ
+            self.pred = self._pred
+            self.salta_anno = self._salta_anno
+        elif value == Bambino.ALTERZOANNO:
+            self.succ = self._succ
+            self.pred = self._pred
+            self.salta_anno = lambda *args: print("Il bambino e` nello stato alTerzoAnno  e non puo` saltare un anno")
+        elif value == Bambino.DIPLOMATO:
+            self.succ = lambda *args: print("Il bambino  si e` gia` diplomato e non puo` avanzare in uno stato successivo")
+            self.pred = self._pred
+            self.salta_anno = lambda *args: print("Il bambino  si e` gia` diplomato e non puo` saltare un anno")
 
     def stampaStato(self):
-        print("il bambino è " + str(self.state))
-    def pred(self):
-        self.state = self.preced
-    def succ(self):
-        self.state = self.success
-    def salta_anno(self):
-        self.state = self.salto
+        print("il bambino è nello stato " + str(self._status[self.state]))
+
+    def _pred(self):
+        self.state -=1
+
+    def _succ(self):
+        self.state +=1
+
+    def _salta_anno(self):
+        self.state +=2
+
 
 def main():
-    bambino =Bambino()
+    bambino = Bambino()
     bambino.stampaStato()
     bambino.pred()
     bambino.succ()
