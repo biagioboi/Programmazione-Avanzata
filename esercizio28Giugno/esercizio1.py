@@ -13,6 +13,7 @@ def coroutine(function):
 def init(sequence):
     pipeline = Handler_04(Handler_59(Handler_gt9(Default_Handler())))
     for x in sequence:
+        print("\n\nEseguo la richiesta: {}".format(x))
         pipeline.send(x)
 
 
@@ -64,8 +65,8 @@ def Default_Handler(successor = None):
 
 
 def main():
-    x = [800, 20 , 15]
-    y = [20, 6, 7, 8]
+    x = [10,2,3,4,5]
+    y = [6, 7, 8]
     init([x, y])
 
 
