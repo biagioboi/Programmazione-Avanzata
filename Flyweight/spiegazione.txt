@@ -1,0 +1,11 @@
+Tale design pattern è nato per gestire un gran numero di oggetti, che possono essere duplicati tra loro, il pattern
+è implementato in modo da avere un'unica istanza per rappresentare tutti gli oggetti uguali tra loro; e quando è necessario
+questa istanza viene condivisa.
+Il modo più semplice per realizzare questa cosa forse è attraverso l'uso di dict(), in cui ciascuno oggetto corrisponde ad un valore
+identificato come unica chiave; ciò assicura che ciascun oggetto distinto venga creato un'unica volta, indipendetemente dalle volte in cui viene usato
+Un altro modo per ridurre l'uso della memoria è l'uso di __slots__
+Ricordiamo che in python ogni classe può avere attributi di istanza, che vengono conservati in un dizionario relativo a quell'istanza, e così via per tutte le istanze
+con la possibilità di aggiornare questo dizionario anche a runtime con l'update().
+Chiaramente quando i nomi degli attributi d'istanza sono noti potremmo pensare di fare qualcosa di diverso, per risparmiare molta memoria.
+Difatti slots ci permette di definire un dizionario che non fa aggiungere nuovi attributi.
+

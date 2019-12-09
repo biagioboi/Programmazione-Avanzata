@@ -1,0 +1,13 @@
+Il design pattern Facade è un design pattern strutturale e serve a creare un'interfaccia semplificata per un sistema costruito da
+interfacce o classi più complesse o di basso livello.
+Un esempio è l'interfaccia delle librerie che gestiscono archivi; esse hanno un'interfaccia diversa a seconda dell'estensione del file.
+Anzichè ricordarci ogni volta di quale metodo ha bisogno quella libreria per gestire gli archivi, potremmo pensare di unificare tutte le
+librerie in un solo modulo e poi all'interno del metodo unico per ogni tipo di file, andare a fare la differenziazione e chiamare i diversi
+metodi a seconda dell'estensione del file.
+
+Context Manager
+I context manager ci permettono di lavorare su un file all'interno di un blocco with .. as; per far si che ciò avvenga, la classe dell'obj deve
+implementare i metodi __enter__ ed __exit__. In particolare exit è quel metodo che viene invocato all'uscita dal context manager, sia esso causato
+da eccezioni, sia esso causato dalla fine della lettura.
+In particolare se si esce da un context manager (invocazione di __exit__) il metodo verrà invocato con i tre parametri uguali a None, diversamente
+se si è usciti a causa di un'eccezione allora i tre parametri assumeranno valore diverso da None.

@@ -1,0 +1,21 @@
+Python supporta sia la concorrenza basata sui processi che quella basata sui thread.
+il problema del GIL, quando si avvia un processo con più thread, python assegna un solo interprete; asssegnando un solo interprete ad un solo processo;
+tutti i thread appartenenti al processo devono utilizzare il medesimo interprete; ciò causa un rallentamento.
+i thread in py vengono utilizzati per programmi di i/o boundary.
+I processi invece vengono utilizzati per cpu bound.
+
+Il problema base del multiprocessing e del multithread sta nella condivisione dei dati; difatti i dati modificabili devono essere protetti da lock
+per assicurare che tutti gli accessi siano serializzati in modo che un solo thread o processo possa accedere ai dati condivisi.
+Quando più thread o processi provoano ad accedere a dati condivisi, essi vengono bloccati ad eccezione di uno.
+Di conseguenza è bene usare poco i lock e per il più breve tempo possibile.
+
+La soluzione più semplice è quella di non condividere dati modificabili, ma a volte i thread hanno bisogno di modificare questi dati e la soluzione è utilizzare una struttura dati
+che supporta l'accesso concorrente.
+Il modolo queue fornisce diverse code thread-safe; mentre per la concorrenza basata su multiprocessing possiamo far uso dell classi multiprocessing.JoinableQueue e multiprocessing.Queue
+Le code forniscono una singola sorgente di job per tutti i thread e tutti i processi, e una singola destinazione per i risultati.
+
+Un oggetto multiprocessing.Process rappresenta un'attività che è svolta in un processo separato; i metodi della classe sono run() e start()
+- run : rappresenta l'attività del processo e può essere sovrascritto; il metodo standard invoca l'oggetto collable passato come parametro al costruttore di Process
+- start: dà inizio all'attività del processo e deve essere invocato al più una volta per oggetto processo
+- join (timeout) : se l'argomento è none il metodo si blocca fin quando l'oggetto processo il cui join è stato invocato non termina. Se il timout è un numero positivo join si blocca al più per timout secondi
+il metodo restituisce None se il processo termina o se scade il tempo di timout.
