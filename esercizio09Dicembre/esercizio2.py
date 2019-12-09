@@ -2,7 +2,7 @@
 # gli intervalli sono [1-10], [11-20] [21-30]
 # create un oggetto cliente
 # creare le richieste da processare
-# inviare le richieste, una alla volta, agli hangler come essi appaiono nella sequenza definita nella classe Client
+# inviare le richieste, una alla volta, agli handlers come essi appaiono nella sequenza definita nella classe Client
 
 
 class AbstractHandler:
