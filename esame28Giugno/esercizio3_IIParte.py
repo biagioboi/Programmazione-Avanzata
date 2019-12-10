@@ -1,6 +1,6 @@
 import time
 import datetime
-from esercizio28Giugno.esercizio3_IParte import Libro
+from esame28Giugno.esercizio3_IParte import Libro
 
 def main():
     HV = VistaStorica()

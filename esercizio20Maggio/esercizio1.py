@@ -1,5 +1,25 @@
 import collections
 import itertools
+import time
+
+
+class HistoryView:
+    def __init__(self):
+        self.history = list()
+
+    def update(self, ob):
+        if len(ob.grades) > 0:
+            self.history.append((ob.grades, ob.english_r, time.time()))
+
+
+class LiveView:
+
+    def update(self, ob):
+        if ob.english_r is True:
+            print("Cambio stato: lo studente ha appena superato la prova di Inglese\n")
+        elif ob.total_cfu > 0:
+            print("Cambio stato: lo studente ha superato un nuovo esame")
+            print("Cambio stato: il numero di CFU e` : ", ob.total_cfu, "\n")
 
 
 class Observer:
@@ -21,27 +41,47 @@ class Observer:
 
 class LaureaT_Student(Observer):
 
-    def __init__(self, total_cfu = 0, grades = {}):
-        self.total_cfu = total_cfu
-        self._english_r = None
-        self.grades = grades
+    def __init__(self, english_r = False):
+        super().__init__()
+        self._total_cfu = 0
+        self.english_r = english_r
+        self.grades = {}
 
     def add_grades(self, exam, voto):
-        nome = exam.Exam
+        nome = exam.nome_esame
         cfu = exam.name_cfu
-        if (nome == "inglese"):
-            self.english_r = True
+        self.grades.update({nome: voto})
+        self.total_cfu += cfu
+
+    @property
+    def total_cfu(self):
+        return self._total_cfu
+
+    @total_cfu.setter
+    def total_cfu(self, value):
+        self._total_cfu = value
+        self.observers_notify(self)
 
     @property
     def english_r(self):
         return self._english_r
 
     @english_r.setter
-    def enflish_r(self, value):
-        pass
+    def english_r(self, value):
+        self._english_r = value
+        if value is True:
+            self.observers_notify(self)
 
 
-Exam = collections.namedtuple("Exam", "name_cfu")
+history = HistoryView()
+live = LiveView()
+laurea = LaureaT_Student()
+laurea.observers_add(history, live)
+Exam = collections.namedtuple("Exam", ["nome_esame", "name_cfu"])
+x = Exam("Programmazione I", 9)
+laurea.add_grades(x, 28)
+laurea.english_r = True
+
 
 
 

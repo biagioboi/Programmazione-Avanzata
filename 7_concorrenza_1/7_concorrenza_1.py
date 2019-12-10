@@ -1,4 +1,4 @@
-#Scrivere la funzione procTesto all’interno del file esercizio4.py.
+#Scrivere la funzione procTesto all’interno del file esercizio4Futures.py.
 # Se la funzione ha bisogno di invocare altre procedure, fornire anche quest’ultime.
 # La funzione procTesto prende in input una lista di nomi di file, una lista di stringhe,
 # e il parametro concorrenza. La funzione procTesto deve cecare nel testo dell’i-esimo file
