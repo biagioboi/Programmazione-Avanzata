@@ -26,7 +26,7 @@ def scrivi_tutti(strs, n, concurrency = 0):
 def worker(jobs):
     while True:
         s, m = jobs.get()
-        print("Questa è la lista prodotta per {}: {}".format(s, scrivi_tutti(s, m)))
+        print("Questa è la lista prodotta per {}: {}".format(s, stampa(s, m)))
         jobs.task_done()
 
 def create_processes(jobs, concurrency):
@@ -37,7 +37,7 @@ def create_processes(jobs, concurrency):
 
 
 def main():
-    scrivi_tutti(["Maria", "Marco", "Giovanni"], 100, 1)
+    scrivi_tutti(["Maria", "Marco"], 10, 1)
 
 
 if __name__ == "__main__":

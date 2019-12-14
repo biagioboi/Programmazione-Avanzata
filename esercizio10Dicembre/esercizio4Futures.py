@@ -29,7 +29,7 @@ def process(futures):
 
 
 def main():
-    scrivi_tutti(["Maria", "Marco"], 10, 10)
+    scrivi_tutti(["Maria", "Marco"], 10, 1)
 
 
 if __name__ == "__main__":
