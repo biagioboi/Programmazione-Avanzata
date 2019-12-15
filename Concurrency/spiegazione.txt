@@ -32,4 +32,12 @@ elementi di concurrent.futures.as_completed(futures) e ci prendiamo il risultato
 
 Implementazione con Multiprocessing:
 Andiamo a definire una JoinableQueue per tener traccia dei jobs, e una Queue per tenere traccia dei risultati.
-Dopodichè per ogni processo
+Dopodichè andiamo a creare un processo per ogni valore nel range 0, maxprocess attravers
+multiprocessing.Process(target = ?, args = ?), dove il target è una funzione che processerà tutte le richieste (worker)
+e assegnerà a ciascune di esse una funzione, mentre args sono gli argomenti passati come parametro al worker; inoltre
+andiamo a specificare che il processo è un demon e facciamo partire il processo.
+Dopo aver inizializzato i processi andiamo ad aggiungere i job ai processi attraverso jobs.put((args)).
+Infine andiamo a richiamare la jobs.join() che andrà ad aspettare la terminazione di tutti i processi e poi terminerà.
+
+Il worker in particolare chiamerà la jobs.get() per prendere i parametri passati in precedenza e jobs.task_done() per
+comunicare che ha terminato l'esecuzione
