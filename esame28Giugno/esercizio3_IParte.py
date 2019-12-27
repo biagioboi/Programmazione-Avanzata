@@ -108,7 +108,7 @@ class Libro(Observed):
         else:
             self.__riferimenti = MyDict()
             for x, z in enumerate(value):
-                self.__riferimenti.update({x : z})
+                self.__riferimenti.update({x:z})
 
     @property
     def numero_copie(self):
